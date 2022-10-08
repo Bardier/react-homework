@@ -1,0 +1,80 @@
+.modal {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  &__content {
+    min-width: 500px;
+    position: relative;
+    display: inline-block;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #e74c3c;
+    color: #fff;
+    border-radius: 5px;
+  }
+
+  &__header {
+    font-size: 22px;
+    padding: 20px;
+    font-weight: 600;
+    background-color: #d44637;
+    margin: 0;
+  }
+
+  &__text {
+    text-align: center;
+    margin: 0;
+    padding: 15px;
+    margin: 20px 0;
+  }
+
+  &__btn-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+
+    & > button:first-child {
+      margin-right: 30px;
+    }
+  }
+
+  &__btn-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    width: 30px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+
+    &::after,
+    &::before {
+      content: "";
+      position: absolute;
+      display: block;
+      background-color: #000;
+    }
+
+    &::after {
+      width: 30px;
+      height: 3px;
+      top: 50%;
+      left: 0;
+      transform: rotate(45deg) translateY(-50%);
+    }
+
+    &::before {
+      width: 3px;
+      height: 30px;
+      top: 0;
+      left: 50%;
+      transform: rotate(45deg) translateX(-50%);
+    }
+  }
+}
