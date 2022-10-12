@@ -1,0 +1,38 @@
+.card {
+  border: 2px solid lightgray;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+
+  &__img {
+    width: 100%;
+  }
+
+  &__params {
+    position: relative;
+  }
+
+  &__id {
+    margin-top: 0;
+  }
+
+  &__title {
+    flex-grow: 1;
+  }
+
+  &__price > span {
+    font-weight: 700;
+  }
+
+  &__favorite {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+  }
+}
