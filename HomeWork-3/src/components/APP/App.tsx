@@ -1,20 +1,27 @@
 import { FC, useState, useEffect } from "react";
+
+import { IGoods } from "../../models";
+import { MainNavigation } from "../../pages/MainNavigation";
 import { Portal } from "../Portal/Portal";
 import { Modal } from "../Modal/Modal";
-import { IGoods } from "../../models";
 import { getGoods } from "../../helpers";
-
-import { GoodsPage } from "../../pages/GoodsPage";
 import { Header } from "../Header/Header";
 
 import "./App.scss";
 
 export const App: FC = () => {
+  // * ------------------------------------------------------------
+  // * State
+  // * ------------------------------------------------------------
+
   const [buyModal, setBuyModal] = useState<boolean>(false);
+  const [removeFromCartModal, setRemoveFromCartModal] =
+    useState<boolean>(false);
   const [goods, setGoods] = useState<IGoods[]>([]);
   const [newGoods, setNewGoods] = useState<IGoods | null>(null);
   const [cart, setCart] = useState<IGoods[]>([]);
   const [favorites, setFavorites] = useState<IGoods[]>([]);
+  const [removeGoods, setRemoveGoods] = useState<IGoods | null>(null);
 
   // * ------------------------------------------------------------
   // * Жизненные циклы
@@ -41,9 +48,15 @@ export const App: FC = () => {
     setBuyModal(true);
   };
 
+  const openRemoveFromCartModal = () => {
+    document.body.classList.add("open-modal");
+    setRemoveFromCartModal(true);
+  };
+
   const closeModals = () => {
     document.body.classList.remove("open-modal");
     setBuyModal(false);
+    setRemoveFromCartModal(false);
   };
 
   // * ------------------------------------------------------------
@@ -62,6 +75,18 @@ export const App: FC = () => {
 
       setCart([...cart, newGoods]);
       setNewGoods(null);
+    }
+  };
+
+  const removeFromCart = (goods: IGoods) => {
+    openRemoveFromCartModal();
+    setRemoveGoods(goods);
+  };
+
+  const confirmRemoveFromCart = () => {
+    if (removeGoods) {
+      setCart((cart) => cart.filter(({ id }) => id !== removeGoods.id));
+      setRemoveGoods(null);
     }
   };
 
@@ -86,11 +111,16 @@ export const App: FC = () => {
   return (
     <div className="app">
       <Header cartCount={cart.length} favoriteCount={favorites.length} />
-      <GoodsPage
-        goods={goods}
+
+      <MainNavigation
         addToCart={addToCart}
         addToFavorites={addToFavorites}
+        favorites={favorites}
+        goods={goods}
+        cart={cart}
+        removeFromCart={removeFromCart}
       />
+
       <Portal>
         {buyModal && (
           <Modal
@@ -99,6 +129,15 @@ export const App: FC = () => {
             closeModal={closeModals}
             confirmBtn={confirmAddToCart}
             text={newGoods?.name}
+          />
+        )}
+        {removeFromCartModal && (
+          <Modal
+            closeButton={true}
+            header="Точно хотите удалить из корзины?"
+            closeModal={closeModals}
+            confirmBtn={confirmRemoveFromCart}
+            text={removeGoods?.name}
           />
         )}
       </Portal>

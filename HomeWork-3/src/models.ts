@@ -4,4 +4,5 @@ export interface IGoods {
   url: string;
   id: string;
   color: string;
+  amount?: number;
 }

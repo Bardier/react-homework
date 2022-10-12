@@ -35,7 +35,6 @@ export const Modal: FC<IProps> = ({
           <Button
             bgColor="#b3382c"
             onClick={() => {
-              console.log("Cancel");
               closeModal();
             }}
             text="Cancel"

@@ -5,6 +5,7 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+  position: relative;
 
   &__img {
     width: 100%;
@@ -34,5 +35,17 @@
     background-size: cover;
     width: 30px;
     height: 30px;
+  }
+
+  &__btn-remove {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: -2px;
+    right: -2px;
+    border: none;
+    background-color: lightcoral;
+    border-top-right-radius: 10px;
+    cursor: pointer;
   }
 }

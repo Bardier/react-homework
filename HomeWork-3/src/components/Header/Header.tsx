@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Link } from "react-router-dom";
 
 import "./Header.scss";
 
@@ -14,19 +15,30 @@ interface IProps {
 export const Header: FC<IProps> = ({ cartCount, favoriteCount }) => {
   return (
     <header className="header">
-      <img src={logoImg} alt="WorkService" className="header__logo" />
+      <Link to="/">
+        <img src={logoImg} alt="WorkService" className="header__logo" />
+      </Link>
+
       <ul className="header__actions">
         <li className="header__actions-item">
-          <img src={heartImg} alt="Корзина" className="header__actions-img" />
-          <span className="header__actions-count">
-            {favoriteCount !== 0 && favoriteCount}
-          </span>
+          <Link to="/favorites">
+            <img
+              src={heartImg}
+              alt="Избранное"
+              className="header__actions-img"
+            />
+            <span className="header__actions-count">
+              {favoriteCount !== 0 && favoriteCount}
+            </span>
+          </Link>
         </li>
         <li className="header__actions-item">
-          <img src={cartImg} alt="Корзина" className="header__actions-img" />
-          <span className="header__actions-count">
-            {cartCount !== 0 && cartCount}
-          </span>
+          <Link to="/cart">
+            <img src={cartImg} alt="Корзина" className="header__actions-img" />
+            <span className="header__actions-count">
+              {cartCount !== 0 && cartCount}
+            </span>
+          </Link>
         </li>
       </ul>
     </header>

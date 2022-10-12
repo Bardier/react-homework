@@ -1,17 +1,19 @@
 import { FC } from "react";
 import { IGoods } from "../../models";
-import { Card } from "./Card";
-
-import "./CardsList.scss";
+import { Card } from "../Cards/Card";
 
 interface IProps {
-  goods: IGoods[];
+  favorites: IGoods[];
   addToCart: (newGoods: IGoods) => void;
   addToFavorites: (newFavorite: IGoods) => void;
 }
 
-export const CardsList: FC<IProps> = ({ goods, addToCart, addToFavorites }) => {
-  const renderCardList = goods.map((card) => (
+export const Favorites: FC<IProps> = ({
+  favorites,
+  addToCart,
+  addToFavorites,
+}) => {
+  const renderFavorites = favorites.map((card) => (
     <Card
       card={card}
       key={card.id}
@@ -22,8 +24,8 @@ export const CardsList: FC<IProps> = ({ goods, addToCart, addToFavorites }) => {
 
   return (
     <>
-      <h1 className="page-title">Товары недели</h1>
-      <ul className="cards-list">{renderCardList}</ul>
+      <h1 className="page-title">Избранное</h1>
+      <ul className="cards-list">{renderFavorites}</ul>
     </>
   );
 };

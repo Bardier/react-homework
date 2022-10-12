@@ -11,9 +11,17 @@ interface IProps {
   card: IGoods;
   addToCart: (newGoods: IGoods) => void;
   addToFavorites: (newFavorite: IGoods) => void;
+  removeFromCart?: (newGoods: IGoods) => void;
+  buyButton?: boolean;
 }
 
-export const Card: FC<IProps> = ({ card, addToCart, addToFavorites }) => {
+export const Card: FC<IProps> = ({
+  card,
+  addToCart,
+  addToFavorites,
+  removeFromCart,
+  buyButton = true,
+}) => {
   const [favorite, setFavorite] = useState<boolean>(false);
 
   useEffect(() => {
@@ -33,6 +41,15 @@ export const Card: FC<IProps> = ({ card, addToCart, addToFavorites }) => {
 
   return (
     <li className="card">
+      {removeFromCart && (
+        <button
+          className="card__btn-remove"
+          onClick={() => removeFromCart(card)}
+        >
+          X
+        </button>
+      )}
+
       <img src={url} alt={name} className="card__img" />
       <h2 className="card__title">{name}</h2>
       <div className="card__params">
@@ -52,7 +69,9 @@ export const Card: FC<IProps> = ({ card, addToCart, addToFavorites }) => {
           }}
         ></div>
       </div>
-      <Button bgColor="green" onClick={() => addToCart(card)} text="Купить" />
+      {buyButton && (
+        <Button bgColor="green" onClick={() => addToCart(card)} text="Купить" />
+      )}
     </li>
   );
 };
