@@ -70,8 +70,8 @@ export const App: FC = () => {
 
   const confirmAddToCart = () => {
     if (newGoods) {
-      const localCart = [...cart, newGoods];
-      localStorage.setItem("cart", JSON.stringify(localCart));
+      const newCart = [...cart, newGoods];
+      localStorage.setItem("cart", JSON.stringify(newCart));
 
       setCart([...cart, newGoods]);
       setNewGoods(null);
@@ -85,7 +85,9 @@ export const App: FC = () => {
 
   const confirmRemoveFromCart = () => {
     if (removeGoods) {
-      setCart((cart) => cart.filter(({ id }) => id !== removeGoods.id));
+      const newCart = cart.filter(({ id }) => id !== removeGoods.id);
+      localStorage.setItem("cart", JSON.stringify(newCart));
+      setCart(newCart);
       setRemoveGoods(null);
     }
   };
