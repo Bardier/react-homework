@@ -1,0 +1,43 @@
+import { FC, useEffect } from "react";
+
+import { HeaderPage } from "../../pages/HeaderPage";
+import { IndexRoutingPages } from "../../pages/IndexRoutingPages";
+
+import { useAppDispatch } from "../../hooks/storeHooks";
+import { fetchGoods } from "../../store/goods/fetchGoods";
+import { addFavoritesFromLocalStorage } from "../../store/favorites/favoritesSlice";
+import { addGoodsFromLocalStore } from "../../store/cart/cartSlice";
+
+import "./App.scss";
+import { Portal } from "../Portal/Portal";
+import { Modal } from "../Modal/Modal";
+
+export const App: FC = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    // Добавил setTimeout для отображения лоудера
+    setTimeout(() => {
+      dispatch(fetchGoods());
+    }, 500);
+  }, []);
+
+  useEffect(() => {
+    const localFavorites = JSON.parse(
+      localStorage.getItem("favorites") || "[]"
+    );
+    const localCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    dispatch(addFavoritesFromLocalStorage(localFavorites));
+    dispatch(addGoodsFromLocalStore(localCart));
+  }, []);
+
+  return (
+    <div className="app">
+      <div className="container">
+        <HeaderPage />
+        <IndexRoutingPages />
+        {/* <Portal children={<Modal />} /> */}
+      </div>
+    </div>
+  );
+};

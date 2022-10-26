@@ -1,8 +1,8 @@
 export interface IGoods {
   name: string;
-  price: string;
+  price: number;
   url: string;
   id: string;
   color: string;
-  cartAmount?: number;
+  cartAmount: number;
 }
