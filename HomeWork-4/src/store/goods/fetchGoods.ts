@@ -1,5 +1,5 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { IGoods } from "../../models";
+import {createAsyncThunk} from "@reduxjs/toolkit";
+import {IGoods} from "../../models";
 
 export const fetchGoods = createAsyncThunk<
   IGoods[],

@@ -5,6 +5,7 @@
 }
 
 .goods {
+  position: relative;
   padding: 10px;
   border: 1px solid lightgray;
   display: flex;
@@ -35,5 +36,14 @@
     &--active svg {
       fill: gold;
     }
+  }
+
+  &__delete {
+    cursor: pointer;
+    border: 2px solid gray;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 }

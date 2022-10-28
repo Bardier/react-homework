@@ -1,6 +1,6 @@
-import { FC } from "react";
-import { useAppSelector } from "../../hooks/storeHooks";
-import { Goods } from "../Goods/Goods";
+import {FC} from "react";
+import {useAppSelector} from "../../hooks/storeHooks";
+import {Goods} from "../Goods/Goods";
 
 import "./Home.scss";
 

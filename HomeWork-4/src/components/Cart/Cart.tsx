@@ -8,7 +8,7 @@ export const Cart: FC<IProps> = ({}) => {
   const cartList = useAppSelector((state) => state.cart.cart);
 
   const cartRender = cartList.map((goods) => (
-    <Goods goods={goods} key={goods.id} />
+    <Goods goods={goods} key={goods.id} btnDelete={true} />
   ));
 
   return (

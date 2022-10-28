@@ -1,7 +1,7 @@
-import { FC, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { HandySvg } from "handy-svg";
-import { useAppSelector } from "../../hooks/storeHooks";
+import {FC, useEffect, useState} from "react";
+import {Link} from "react-router-dom";
+import {HandySvg} from "handy-svg";
+import {useAppSelector} from "../../hooks/storeHooks";
 
 import "./Header.scss";
 

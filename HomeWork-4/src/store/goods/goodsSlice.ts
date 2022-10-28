@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IGoods } from "../../models";
-import { fetchGoods } from "./fetchGoods";
+import {createSlice} from "@reduxjs/toolkit";
+import {IGoods} from "../../models";
+import {fetchGoods} from "./fetchGoods";
 
 type GoodsState = {
   goods: IGoods[];

@@ -3,17 +3,19 @@ import { FC, useEffect } from "react";
 import { HeaderPage } from "../../pages/HeaderPage";
 import { IndexRoutingPages } from "../../pages/IndexRoutingPages";
 
-import { useAppDispatch } from "../../hooks/storeHooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/storeHooks";
 import { fetchGoods } from "../../store/goods/fetchGoods";
 import { addFavoritesFromLocalStorage } from "../../store/favorites/favoritesSlice";
 import { addGoodsFromLocalStore } from "../../store/cart/cartSlice";
 
-import "./App.scss";
 import { Portal } from "../Portal/Portal";
 import { Modal } from "../Modal/Modal";
 
+import "./App.scss";
+
 export const App: FC = () => {
   const dispatch = useAppDispatch();
+  const { modalIsOpen } = useAppSelector((state) => state.modal);
 
   useEffect(() => {
     // Добавил setTimeout для отображения лоудера
@@ -36,7 +38,8 @@ export const App: FC = () => {
       <div className="container">
         <HeaderPage />
         <IndexRoutingPages />
-        {/* <Portal children={<Modal />} /> */}
+        {modalIsOpen && <Portal children={<Modal />} />}
+        {}
       </div>
     </div>
   );

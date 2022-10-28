@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
+import { Button } from "../components/Button/Button";
 
 export const ErrorPage: FC = () => {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ export const ErrorPage: FC = () => {
   return (
     <>
       <p>Error page</p>
-      <button onClick={goBack}>Назад кнопка</button>
+      <Button btnFunction={goBack} btnText="Вернуться назад" btnClasses="btn" />
     </>
   );
 };

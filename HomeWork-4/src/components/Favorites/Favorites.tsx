@@ -5,7 +5,6 @@ import { Goods } from "../Goods/Goods";
 
 export const Favorites: FC = () => {
   const goods = useAppSelector((state) => state.goods.goods);
-  console.log(goods);
 
   const favoritesListId = useAppSelector((state) => state.favorites.favorites);
 

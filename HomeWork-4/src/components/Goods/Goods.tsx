@@ -4,19 +4,24 @@ import classNames from "classnames";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/storeHooks";
 import { toggleFavorites } from "../../store/favorites/favoritesSlice";
-import { addGoodsToCart } from "../../store/cart/cartSlice";
+import {
+  openAddGoodsModal,
+  openRemoveGoodsModal,
+} from "../../store/modal/modalSlice";
 
 import { IGoods } from "../../models";
 
 import "./Goods.scss";
 
 import star from "../../resources/img/star.svg";
+import { Button } from "../Button/Button";
 
 interface IProps {
   goods: IGoods;
+  btnDelete?: boolean;
 }
 
-export const Goods: FC<IProps> = ({ goods }) => {
+export const Goods: FC<IProps> = ({ goods, btnDelete = false }) => {
   const { name, price, url, color, id, cartAmount } = goods;
   const dispatch = useAppDispatch();
   const favoritesStore = useAppSelector((state) => state.favorites.favorites);
@@ -38,21 +43,14 @@ export const Goods: FC<IProps> = ({ goods }) => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   };
 
-  const addGoodsInLocalStore = (goods: IGoods) => {
-    const { color, id, name, price, url } = goods;
-    const cartList: IGoods[] = JSON.parse(localStorage.getItem("cart") || "[]");
+  const addGoodsToCart = () => {
+    document.body.classList.add("open-modal");
+    dispatch(openAddGoodsModal(goods));
+  };
 
-    for (let i = 0; i < cartList.length; i++) {
-      if (cartList[i].id === goods.id) {
-        cartList[i].cartAmount += 1;
-
-        localStorage.setItem("cart", JSON.stringify(cartList));
-        return;
-      }
-    }
-
-    cartList.push({ color, id, name, price, url, cartAmount: 1 });
-    localStorage.setItem("cart", JSON.stringify(cartList));
+  const removeGoodsFromCart = () => {
+    document.body.classList.add("open-modal");
+    dispatch(openRemoveGoodsModal(goods));
   };
 
   return (
@@ -65,15 +63,13 @@ export const Goods: FC<IProps> = ({ goods }) => {
         <p className="goods__count">В корзине: {cartAmount}</p>
       )}
       <div className="goods__actions-wrapper">
-        <button
-          className="btn"
-          onClick={() => {
-            dispatch(addGoodsToCart(goods));
-            addGoodsInLocalStore(goods);
-          }}
-        >
-          В корзину
-        </button>
+        {
+          <Button
+            btnClasses="btn"
+            btnFunction={addGoodsToCart}
+            btnText="В корзину"
+          />
+        }
         <div
           className={classNames("goods__favorite", {
             "goods__favorite--active": isFavorite,
@@ -86,6 +82,13 @@ export const Goods: FC<IProps> = ({ goods }) => {
           <HandySvg src={star} />
         </div>
       </div>
+      {btnDelete && (
+        <Button
+          btnClasses="btn btn__cross"
+          btnFunction={removeGoodsFromCart}
+          btnCross={true}
+        />
+      )}
     </li>
   );
 };

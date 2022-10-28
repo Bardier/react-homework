@@ -1,23 +1,27 @@
 import { FC } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/storeHooks";
+import { closeModals } from "../../store/modal/modalSlice";
+import { AddGoodsModal } from "./AddGoodsModal/AddGoodsModal";
+import { RemoveGoodsModal } from "./RemoveGoodsModal/RemoveGoodsModal";
 
 import "./Modal.scss";
 
-interface IProps {
-  title?: string;
-}
+export const Modal: FC = () => {
+  const dispatch = useAppDispatch();
+  const { addGoodsIsOpen, removeGoodsIsOpen } = useAppSelector(
+    (state) => state.modal
+  );
 
-export const Modal: FC<IProps> = ({
-  title = "Добавить картридж в корзину?",
-}) => {
+  const closeModal = () => {
+    document.body.classList.remove("open-modal");
+    dispatch(closeModals());
+  };
+
   return (
-    <div className="modal">
-      <div className="modal__content">
-        <h2 className="modal__title">{title}</h2>
-        <div className="modal__btn-wrapper">
-          <button className="btn btn--modal">Ok</button>
-          <button className="btn btn--modal">Cancel</button>
-        </div>
-        <button className="modal__close-btn">Close</button>
+    <div className="modal" onClick={closeModal}>
+      <div className="modal__content" onClick={(e) => e.stopPropagation()}>
+        {addGoodsIsOpen && <AddGoodsModal closeModal={closeModal} />}
+        {removeGoodsIsOpen && <RemoveGoodsModal closeModal={closeModal} />}
       </div>
     </div>
   );

@@ -1,9 +1,9 @@
-import { FC } from "react";
-import { Route, Routes } from "react-router-dom";
-import { CartPage } from "./CartPage";
-import { ErrorPage } from "./ErrorPage";
-import { FavoritesPage } from "./FavoritesPage";
-import { HomePage } from "./HomePage";
+import {FC} from "react";
+import {Route, Routes} from "react-router-dom";
+import {CartPage} from "./CartPage";
+import {ErrorPage} from "./ErrorPage";
+import {FavoritesPage} from "./FavoritesPage";
+import {HomePage} from "./HomePage";
 
 export const IndexRoutingPages: FC = () => {
   return (
