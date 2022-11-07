@@ -1,0 +1,49 @@
+.goods-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.goods {
+  position: relative;
+  padding: 10px;
+  border: 1px solid lightgray;
+  display: flex;
+  flex-direction: column;
+
+  & .goods__title {
+    flex-grow: 1;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  &__actions-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  &__favorite {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+
+    & svg {
+      width: 50px;
+      height: 50px;
+    }
+
+    &--active svg {
+      fill: gold;
+    }
+  }
+
+  &__delete {
+    cursor: pointer;
+    border: 2px solid gray;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}

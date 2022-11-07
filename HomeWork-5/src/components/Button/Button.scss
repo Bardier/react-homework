@@ -1,0 +1,28 @@
+.btn {
+  cursor: pointer;
+  border: 1px solid red;
+  padding: 10px 20px;
+
+  & span {
+    transition: transform 0.5s;
+    font-weight: 700;
+  }
+
+  &:hover span {
+    display: block;
+    transform: scale(1.2);
+  }
+
+  &__cross {
+    padding: 10px;
+    border: 2px solid gray;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  &.submit {
+    display: block;
+    margin: 0 auto;
+  }
+}
